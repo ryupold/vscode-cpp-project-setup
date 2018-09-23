@@ -10,8 +10,10 @@ This setup has 2 build modes:
   - compile using `make build-exe`
 - library (libhello.dll -> Windows | libhello.so -> Linux | libhello.dylib -> macOS)
   - compile using `make build-lib`
-- both versions compile to a native binary for the current OS
 
+Both versions compile to a native binary for the current OS. You can find the resulting binaries in the **./bin** folder.
+
+after the build you can run `make clean-obj` to remove all debug files in the ./bin folder if you don't need them anymore for debugging.
 
 ## Prerequisites
 
@@ -35,11 +37,14 @@ On Windows I prefer the MSYS2/MinGW toolchain:
 
 ### macOS
 
-- todo
+- Ensure Xcode is installed
+- Install command line tools by opening Terminal and enter: `xcode-select --install`
+- Restart
+- You should now be able to start/debug this example program in VSCode
 
 ### Linux
 
-- todo
+- todo: not tested yet but theoretically it should work :)
 
 ## Debug
 

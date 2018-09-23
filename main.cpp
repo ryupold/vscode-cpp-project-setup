@@ -8,6 +8,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    cout << get_hello().c_str();
+    auto hello_str = get_hello();
+    cout << hello_str << endl;
     return 0;
 }

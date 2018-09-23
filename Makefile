@@ -1,9 +1,10 @@
-.PHONY: all build clean
+..PHONY: all build clean
 .ONESHELL:
 
 CC = g++
 CPP_VERSION = c++17
-CFLAGS = -std=$(CPP_VERSION) -I. -g 
+CFLAGS = -std=$(CPP_VERSION) -I. -g
+OUTPUT_FOLDER = "bin"
 BASE_NAME = hello
 DEPS = hello.h
 OBJ = hello.o
@@ -26,21 +27,37 @@ else
     endif
 endif
 
-build-exe: $(Executable) clean-obj
-build-lib: $(Library) clean-obj
+build-exe: $(Executable)
+build-lib: $(Library)
 
 clean: clean-obj
-	rm $(Library) || true
-	rm $(Executable) || true
+	rm -R $(OUTPUT_FOLDER) || true
 
 clean-obj:
-	rm *.o || true
+	rm $(OUTPUT_FOLDER)/*.o || true
+ifeq ($(UNAME_S),Darwin)
+	rm -R $(OUTPUT_FOLDER)/*.dSYM || true
+endif
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(Library): $(OBJ)
 	$(CC) $(CFLAGS_LIB) -o $@ $^ $(CFLAGS)
+	mkdir -p $(OUTPUT_FOLDER) || true
+ifeq ($(UNAME_S),Darwin)
+	dsymutil $(Library)
+	mv $(Library).dSYM $(OUTPUT_FOLDER)/$(Library).dSYM
+endif
+	mv *.o $(OUTPUT_FOLDER)/
+	mv $(Library) $(OUTPUT_FOLDER)/$(Library)
 
 $(Executable): $(OBJ) main.o
 	$(CC) -o $@ $^ $(CFLAGS)
+	mkdir -p $(OUTPUT_FOLDER) || true
+ifeq ($(UNAME_S),Darwin)
+	dsymutil $(Executable)
+	mv $(Executable).dSYM $(OUTPUT_FOLDER)/$(Executable).dSYM
+endif
+	mv *.o $(OUTPUT_FOLDER)/
+	mv $(Executable) $(OUTPUT_FOLDER)/$(Executable)

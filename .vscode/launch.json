@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "Debug",
             "preLaunchTask": "build EXE",
             "type": "cppdbg",
             "request": "launch",
@@ -23,16 +23,16 @@
                 "trace": false
             },
             "windows": {
-                "program": "${workspaceRoot}/hello.exe",
+                "program": "${workspaceRoot}/bin/hello.exe",
                 "MIMode": "gdb",
                 "miDebuggerPath": "C:\\msys64\\mingw64\\bin\\gdb.exe"
             },
             "linux": {
-                "program": "${workspaceRoot}/hello",
+                "program": "${workspaceRoot}/bin/hello",
                 "MIMode": "gdb"
             },
             "osx": {
-                "program": "${workspaceRoot}/hello",
+                "program": "${workspaceRoot}/bin/hello",
                 "MIMode": "lldb"
             }
         }
