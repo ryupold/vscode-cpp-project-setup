@@ -17,6 +17,10 @@ after the build you can run `make clean-obj` to remove all debug files in the ./
 
 ## Prerequisites
 
+### VS Code
+
+The only thing you need to do in VSCode is to install the C/C++ extension from Microsoft.
+
 ### Windows
 
 On Windows I prefer the MSYS2/MinGW toolchain:
